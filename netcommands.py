@@ -6,7 +6,11 @@ import sys
 class netcommands():
 
     def getnetsh(self):
-        result = subprocess.check_output(["netsh","wlan","show","interfaces"],shell=True).decode(sys.stdout.encoding)
+        try:
+            result = subprocess.check_output(['netsh','wlan','show','interfaces']).decode(sys.stdout.encoding)
+        except subprocess.CalledProcessError as err:
+            print('netsh Command error' + err)
+            exit(1)
         ssid,strength = self.findstrength(result)
         return ssid,strength
 
