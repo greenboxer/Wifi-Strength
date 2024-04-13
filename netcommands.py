@@ -16,7 +16,7 @@ class netcommands():
             ssid,strength = self.parsenetsh(result)
         elif os.name == 'posix':
             try:
-                result = subprocess.check_output(['iwconfig']).decode(sys.stdout.encoding)
+                result = subprocess.check_output(['iwconfig'],stderr=subprocess.DEVNULL).decode(sys.stdout.encoding)
             except subprocess.CalledProcessError as err:
                 print('iwconfig Command error ' + err)
                 exit(1)
