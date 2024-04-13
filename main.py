@@ -14,17 +14,17 @@ class uiWindow():
         self.root.wm_title("WiFi Strength Tool")    # Makes the title that will appear in the top left
         self.root.config(background = bgcolor)
         self.nc = netcommands()
-        
+
         # Instantiate all Frame Elements
         self.mainframe = Frame(self.root, width=100, height = 600, bg = bgcolor)
         self.mainframe.grid(row=0, column=0, padx=10, pady=2)
-        
+
         # Updates the Frame
         self.root.update()
-        
+
         # Draws all the frame elements
         self.mainframe = self.uiPanel(self.root, self.mainframe, bgcolor)
-        
+
     def start(self):
         self.root.mainloop()                        #start monitoring and updating the GUI
 
@@ -70,16 +70,16 @@ class uiWindow():
 
     # Get the wifi strength and updates stuff
     def gettemp(self):
-        ssid,strength = self.nc.getnetsh()
+        ssid,strength = self.nc.getnetstr()
         self.wifissid.set(ssid)
-        self.wifistrength.set(strength+"%")
-        
+        self.wifistrength.set(strength)
+
         run = self.runningstr.get()
         if len(run)>3:
             run="."
         else:
             run=run+"."
-        
+
         self.runningstr.set(run)
 
 
@@ -87,7 +87,7 @@ class uiWindow():
     def startloop(self):
         self.runacquisition = TRUE
         self.updateSTR()
-    
+
     # Stops acquisition
     def stoploop(self):
         self.runacquisition = FALSE
@@ -97,11 +97,10 @@ class uiWindow():
         if self.runacquisition:
             self.gettemp()
             self.frame.after(self.refreshrate, self.updateSTR)
-    
+
     # Exit the program
     def closeexit(self):
         exit(0)
 
 if __name__ == '__main__':
     wifiUI = uiWindow()
-    wifiUI.start()
