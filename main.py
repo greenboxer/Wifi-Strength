@@ -70,9 +70,9 @@ class uiWindow():
 
     # Get the wifi strength and updates stuff
     def gettemp(self):
-        ssid,strength = self.nc.getnetsh()
+        ssid,strength = self.nc.getnetstr()
         self.wifissid.set(ssid)
-        self.wifistrength.set(strength+"%")
+        self.wifistrength.set(strength)
         
         run = self.runningstr.get()
         if len(run)>3:
