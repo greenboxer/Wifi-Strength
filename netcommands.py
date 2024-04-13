@@ -24,7 +24,7 @@ class netcommands():
         else:
             ssid = 'error'
             strength = '0'
-        
+
         return ssid,strength
 
     def parsenetsh(self,string):
@@ -35,14 +35,14 @@ class netcommands():
         ssid = match2.group(1)
 
         return ssid,strength
-    
+
     def parseiwconfig(self,string):
         match1 = re.search('Signal level=(-\d{1,3} dBm)',string)
         strength = match1.group(1)
-        
+
         match2 = re.search('SSID:\"(.+)\"',string)
         ssid = match2.group(1)
-        
+
         return ssid,strength
 
 if __name__ == "__main__":
